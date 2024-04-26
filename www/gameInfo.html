@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Fun Day Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="lib/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="lib/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/assets/css/buttonStyle.css" rel="stylesheet" type="text/css" />
+
+    <!-- toastr -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <!-- lib/Plugins css -->
+    <!-- <link href="lib/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="lib/plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="lib/plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="lib/plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" /> -->
+</head>
+<style type="text/css">
+    .error{
+        color: red;
+    }
+    #sidebar-menu ul li a {
+    display: block;
+    padding: .65rem 1.5rem;
+    color: #a7b1c2;
+    position: relative;
+    font-size: 14px;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    border-bottom: 1px solid gray;
+}
+</style>
+<body>
+    <!-- navbar --> 
+    <div id="header-content"></div>
+    <!--./navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-content"></div>
+    <!-- ./sidebar -->
+
+    <!-- main-content -->
+    <div class="main-content">
+        <!-- page-content -->
+        <div class="page-content">
+            <!-- container Fluid -->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Game Info</h4>
+                        <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">Fun Day</li>
+                        <li class="breadcrumb-item active">Game Info</li>
+                        </ol>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- Main Content -->
+            <div id="addGameBlok" style="display: none;">
+            <div class="row justify-content-center" >
+              <div class="col-md-8">
+                  <div class="card border-info" id="cardDetailsblock">
+                      <div class="card-header border-info" style="background-color: #faf269;">
+                          <div class="row">
+                              <div class="col-md-8"><h3 id="cardTitle">Add New Game Details</h3></div>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                          <form id="gameInfoForm">
+                              <div class="form-group">
+                                <label for="gameId">Game ID</label>
+                                <input type="text" class="form-control" id="gameId" name="gameId" placeholder="Enter game ID" readonly>
+                             </div>
+                            
+                              <div class="form-group">
+                                  <label for="gameName">Game Name</label>
+                                  <input type="text" class="form-control" id="gameName" name="gameName" placeholder="Enter game name">
+                              </div>
+                              
+                              <div class="form-group">
+                                  <label for="gameCost">Game Cost</label>
+                                  <input type="text" class="form-control" id="gameCost" name="gameCost" placeholder="Enter game cost">
+                              </div>
+                              
+                              <div class="form-group">
+                                  <label for="status">Status</label>
+                                  <select class="form-control" id="status" name="status">
+                                    <option value="">--- Select Game Status --</option>
+                                      <option value="1">Active</option>
+                                      <option value="0">Inactive</option>
+                                  </select>
+                              </div>
+
+                              <div class="form-group">
+                                <label for="status">Status</label>
+                                <select class="form-control" id="typeOfGame" name="typeOfGame">
+                                  <option value="">-- Select Type Of Game --</option>
+                                    <option value="MANUAL">Manual Manage</option>
+                                    <option value="TIME">Time Manage</option>
+                                </select>
+                              </div>
+
+                            <div class="form-group">
+                              <label for="status">Time Period</label>
+                              <input type="number" class="form-control" id="time_period" name="time_period" placeholder="Enter Time Game Time Period in a Minutes">
+                            </div>
+
+                            <button type="button" id="saveBtn" onclick="app.gameInfo.saveGameInfo()" style="float:right" class="btn btn-primary">Save</button>
+                            <button type="button" id="backBtn" class="btn btn-danger" style="float:left">Back</button>
+                            <button type="button" id="updateBtn" onclick="app.gameInfo.updateGameInfo()" class="btn btn-primary" style="float:right;display: none; ">Update</button>
+
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          </div>
+
+              <!-- Waiting For Scann    -->
+                <div class="row justify-content-center"  id="gameViewTable">
+                  <div class="col-md-8">
+
+                    <div class="card border-info"  id="cardDetailsblock">  
+                      <div class="card-header border-info" style="background-color: #faf269;">
+                       <div class="row">
+                        <div class="col-md-8"><h3>Game Info Details</h3></div>
+                        <div class="col-md-4" id="addGame" ><a href="#" style="float: right;" class="btn btn-primary">Add Game</a></div>
+
+                       </div> 
+                        <!-- <input type="text" id="serialDataInput" readonly> -->
+                        
+                      </div>
+                      <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">S no</th>
+                                <th scope="col">Game Name</th>
+                                <th scope="col">Game Id</th>
+                                <th scope="col">Game Cost</th>
+                                <th scope="col">Game Period</th>
+                                <th scope="col">Game Type</th>
+
+
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+
+                              </tr>
+                            </thead>
+                            <tbody id="GameInfoBody">      
+                            </tbody>
+                          </table>
+                      </div>
+                      <!-- New Card Details End    -->
+                    </div>
+                  </div>
+             <!-- Main Content End-->
+           </div>
+        <!-- ./page-content -->
+    <!-- footer -->
+    <div id="footer-content"></div>
+   <!-- footer End -->
+</div>
+<script src="lib/assets/js/jquery.min.js"></script>
+
+    <script src="lib/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/assets/js/metismenu.min.js"></script>
+    <script src="lib/assets/js/waves.js"></script>
+    <script src="lib/assets/js/simplebar.min.js"></script>
+    <!-- Morris Js-->
+    <script src="lib/plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="lib/plugins/raphael/raphael.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="lib/assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="lib/assets/js/theme.js"></script>
+
+    <!-- validation -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <!-- toaster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- third party js -->
+    <script src="lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="lib/plugins/datatables/dataTables.bootstrap4.js"></script> -->
+    <!-- <script src="lib/plugins/datatables/dataTables.responsive.min.js"></script> -->
+    <!-- <script src="lib/plugins/datatables/responsive.bootstrap4.min.js"></script> -->
+    <script src="lib/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.print.min.js"></script>
+    <script src="lib/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="lib/plugins/datatables/dataTables.select.min.js"></script>
+    <script src="lib/plugins/datatables/pdfmake.min.js"></script>
+    <script src="lib/plugins/datatables/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+    <!-- Datatables init -->
+    <script src="lib/assets/pages/datatables-demo.js"></script> 
+    <!-- <script src="./lib/jquery/jquery-3.6.3.min.js"></script> -->
+    <!-- <script src="./lib/bootstrap/js/bootstrap.min.js"></script> -->
+   
+    <script src="./js/database.js"></script>
+    <script src="./js/general.js"></script>
+    <script src="./js/db/customerTables.js"></script>
+
+    <script src="./js/db/gameInfoRepo.js"></script>
+    <script src="./js/gameInfo.js"></script>
+   
+
+    <script>
+      // loading  inludes content 
+      $(document).ready(() => {
+      //========header======//
+      $("#header-content").load("includes/header.html", function() {
+      // console.log("Header loaded successfully.");
+      });
+      //=======sidebar=====//
+      $("#sidebar-content").load("includes/sidebar.html", function() {
+      // console.log("Header loaded successfully.");
+      });
+      //=======sidebar=====//
+      $("#footer-content").load("includes/footer.html", function() {
+      // console.log("Header loaded successfully.");
+      });
+      });
+  </script>
+ 
+    
+</body>
+</html>
+
+

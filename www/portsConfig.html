@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Fun Day Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="lib/assets/images/favicon.ico">
+
+    <!-- App css -->
+    <link href="lib/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="lib/assets/css/buttonStyle.css" rel="stylesheet" type="text/css" />
+
+    <!-- toastr -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <!-- lib/Plugins css -->
+    <!-- <link href="lib/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="lib/plugins/datatables/responsive.bootstrap4.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="lib/plugins/datatables/buttons.bootstrap4.css" rel="stylesheet" type="text/css" />
+    <link href="lib/plugins/datatables/select.bootstrap4.css" rel="stylesheet" type="text/css" /> -->
+</head>
+<style type="text/css">
+    .error{
+        color: red;
+    }
+    #sidebar-menu ul li a {
+    display: block;
+    padding: .65rem 1.5rem;
+    color: #a7b1c2;
+    position: relative;
+    font-size: 14px;
+    -webkit-transition: all .4s;
+    transition: all .4s;
+    border-bottom: 1px solid gray;
+}
+</style>
+<body>
+    <!-- navbar --> 
+    <div id="header-content"></div>
+    <!--./navbar -->
+
+    <!-- sidebar -->
+    <div id="sidebar-content"></div>
+    <!-- ./sidebar -->
+
+    <!-- main-content -->
+    <div class="main-content">
+        <!-- page-content -->
+        <div class="page-content">
+            <!-- container Fluid -->
+            <div class="container-fluid">
+                <!-- start page title -->
+                <div class="row">
+                  <div class="col-12">
+                    <div class="page-title-box d-flex align-items-center justify-content-between">
+                        <h4 class="mb-0 font-size-18">Ports Config</h4>
+                        <div class="page-title-right">
+                        <ol class="breadcrumb m-0">
+                        <li class="breadcrumb-item">Fun Day</li>
+                        <li class="breadcrumb-item active">Ports Config</li>
+                        </ol>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- Main Content -->
+      
+
+              <!-- Waiting For Scann    -->
+                <div class="row justify-content-center" >
+                  <div class="col-md-8">
+                    <div class="card border-info"  id="cardDetailsblock">  
+                      <div class="card-header border-info" style="background-color: #faf269;">
+                        <h3>Ports Config</h3>
+                        <!-- <input type="text" id="serialDataInput" readonly> -->
+                      </div>
+                      <div class="card-body">
+                        <form id="portConfigForm">
+                            <div class="form-group">
+                                <label for="comPortSelect">COM Port:</label>
+                                <select class="form-control" id="comPortSelect" name="comPort">
+                                    <!-- Options for COM port names will be dynamically populated here -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="baudRateSelect">Baud Rate:</label>
+                                <select class="form-control" id="baudRateSelect" name="baudRate">
+                                    <!-- Options for baud rates will be statically defined here -->
+                                    <option value="9600">9600</option>
+                                    <option value="19200">19200</option>
+                                    <option value="38400">38400</option>
+                                    <option value="57600">57600</option>
+                                    <option value="115200">115200</option>
+                                </select>
+                            </div>
+                           
+                            <button type="button" class="btn btn-primary" onclick="app.ports.savePorts()" style="float: right;">Confirm</button> 
+                            <button type="button" class="btn btn-danger">Back</button>
+                        </form>
+                    </div>
+                      <!-- New Card Details End    -->
+                    </div>
+                  </div>
+             <!-- Main Content End-->
+           </div>
+        <!-- ./page-content -->
+    <!-- footer -->
+    <div id="footer-content"></div>
+   <!-- footer End -->
+</div>
+<script src="lib/assets/js/jquery.min.js"></script>
+
+    <script src="lib/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/assets/js/metismenu.min.js"></script>
+    <script src="lib/assets/js/waves.js"></script>
+    <script src="lib/assets/js/simplebar.min.js"></script>
+    <!-- Morris Js-->
+    <script src="lib/plugins/morris-js/morris.min.js"></script>
+    <!-- Raphael Js-->
+    <script src="lib/plugins/raphael/raphael.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="lib/assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="lib/assets/js/theme.js"></script>
+
+    <!-- validation -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
+    <!-- toaster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <!-- third party js -->
+    <script src="lib/plugins/datatables/jquery.dataTables.min.js"></script>
+    <!-- <script src="lib/plugins/datatables/dataTables.bootstrap4.js"></script> -->
+    <!-- <script src="lib/plugins/datatables/dataTables.responsive.min.js"></script> -->
+    <!-- <script src="lib/plugins/datatables/responsive.bootstrap4.min.js"></script> -->
+    <script src="lib/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.flash.min.js"></script>
+    <script src="lib/plugins/datatables/buttons.print.min.js"></script>
+    <script src="lib/plugins/datatables/dataTables.keyTable.min.js"></script>
+    <script src="lib/plugins/datatables/dataTables.select.min.js"></script>
+    <script src="lib/plugins/datatables/pdfmake.min.js"></script>
+    <script src="lib/plugins/datatables/vfs_fonts.js"></script>
+    <!-- third party js ends -->
+    <!-- Datatables init -->
+    <script src="lib/assets/pages/datatables-demo.js"></script> 
+    <!-- <script src="./lib/jquery/jquery-3.6.3.min.js"></script> -->
+    <!-- <script src="./lib/bootstrap/js/bootstrap.min.js"></script> -->
+   
+    <script src="./js/database.js"></script>
+    <script src="./js/general.js"></script>
+    <script src="./js/db/customerTables.js"></script>
+
+    <script src="./js/db/portConfigRepo.js"></script>
+    <script src="./js/portConfig.js"></script>
+
+    <script>
+      // loading  inludes content 
+      $(document).ready(() => {
+      //========header======//
+      $("#header-content").load("includes/header.html", function() {
+      // console.log("Header loaded successfully.");
+      });
+      //=======sidebar=====//
+      $("#sidebar-content").load("includes/sidebar.html", function() {
+      // console.log("Header loaded successfully.");
+      });
+      //=======sidebar=====//
+      $("#footer-content").load("includes/footer.html", function() {
+      // console.log("Header loaded successfully.");
+      });
+      });
+
+       // Wait for the page to be fully loaded
+  document.addEventListener("DOMContentLoaded", function(event) {
+    // Find the modal button element
+    var modalButton = document.getElementById("modalButton");
+    // Trigger a click event on the modal button
+    if (modalButton) {
+      modalButton.click();
+    }
+  });
+  </script>
+ 
+    
+</body>
+</html>
+
+
